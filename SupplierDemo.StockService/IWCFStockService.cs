@@ -13,6 +13,7 @@ namespace SupplierDemo.StockService
     public interface IWCFStockService
     {
         [OperationContract]
-        List<Stock> GetAllStock();
+        string Get();
+        //List<Stock> GetAllStock();
     }
 }
