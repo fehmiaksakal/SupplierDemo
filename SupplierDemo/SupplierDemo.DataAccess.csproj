@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IStockDal.cs" />
+    <Compile Include="Abstract\ISupplierDal.cs" />
     <Compile Include="Concrete\EfStockDal.cs" />
+    <Compile Include="Concrete\EfSupplierDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

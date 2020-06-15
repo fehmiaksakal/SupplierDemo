@@ -15,11 +15,11 @@ namespace SupplierDemo.WebUI.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Get", ReplyAction="http://tempuri.org/IService1/GetResponse")]
-        string Get();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStocks", ReplyAction="http://tempuri.org/IService1/GetStocksResponse")]
+        SupplierDemo.StockServices.Model.MainVM GetStocks();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Get", ReplyAction="http://tempuri.org/IService1/GetResponse")]
-        System.Threading.Tasks.Task<string> GetAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStocks", ReplyAction="http://tempuri.org/IService1/GetStocksResponse")]
+        System.Threading.Tasks.Task<SupplierDemo.StockServices.Model.MainVM> GetStocksAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace SupplierDemo.WebUI.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string Get() {
-            return base.Channel.Get();
+        public SupplierDemo.StockServices.Model.MainVM GetStocks() {
+            return base.Channel.GetStocks();
         }
         
-        public System.Threading.Tasks.Task<string> GetAsync() {
-            return base.Channel.GetAsync();
+        public System.Threading.Tasks.Task<SupplierDemo.StockServices.Model.MainVM> GetStocksAsync() {
+            return base.Channel.GetStocksAsync();
         }
     }
 }

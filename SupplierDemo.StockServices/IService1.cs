@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SupplierDemo.Entites.Entities;
+using SupplierDemo.StockServices.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,7 +16,9 @@ namespace SupplierDemo.StockServices
     {
 
         [OperationContract]
-        string Get();
+        MainVM GetStocks();
+         
+       
 
         // TODO: Add your service operations here
     }

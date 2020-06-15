@@ -4,14 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
+using SupplierDemo.Entites.Entities;
+
 namespace SupplierDemo.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+       ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+
         public ActionResult Index()
         {
-            string a = service.Get();
+
+            var resp = service.GetStocks();
+            HomePageVM homePageVM = new HomePageVM()
+            {
+                stocks = resp.Stock,
+                //suppliers = resp.Supp
+            };
+
             return View();
         }
 

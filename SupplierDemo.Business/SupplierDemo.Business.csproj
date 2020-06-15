@@ -52,8 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IStockService.cs" />
+    <Compile Include="Abstract\ISupplierService.cs" />
     <Compile Include="Concrete\StockManager.cs" />
-    <Compile Include="DependencyResolves\Ninject\BusinessModule.cs" />
+    <Compile Include="Concrete\SupplierManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
