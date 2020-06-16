@@ -5,12 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
 using SupplierDemo.Entites.Entities;
+using SupplierDemo.StockServices.Model;
 
 namespace SupplierDemo.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-       ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+        ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
 
         public ActionResult Index()
         {
@@ -19,24 +20,21 @@ namespace SupplierDemo.WebUI.Controllers
             HomePageVM homePageVM = new HomePageVM()
             {
                 stocks = resp.Stock,
-                //suppliers = resp.Supp
+                suppliers = resp.Supp
             };
 
-            return View();
+            return View(homePageVM);
         }
-
-        public ActionResult About()
+        [HttpPost]
+        public List<StockVM> GetCurStock(string supId)
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+            List<StockVM> resp = service.GetOnlyStock();
+
+
+            return resp;
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
     }
 }

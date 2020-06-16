@@ -16,9 +16,9 @@ namespace SupplierDemo.StockServices.Model
         public int Quatity { get; set; }
 
         [DataMember]
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         [DataMember]
-        public int SupplierId { get; set; }
+        public string SupplierId { get; set; }
     }
 }

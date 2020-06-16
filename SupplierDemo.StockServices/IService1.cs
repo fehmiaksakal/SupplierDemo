@@ -17,9 +17,12 @@ namespace SupplierDemo.StockServices
 
         [OperationContract]
         MainVM GetStocks();
-         
-       
 
+        [OperationContract]
+        List<StockVM> GetOnlyStock();
+
+
+         
         // TODO: Add your service operations here
     }
 

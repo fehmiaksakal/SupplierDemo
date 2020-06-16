@@ -69,6 +69,7 @@ namespace SupplierDemo.StockServices.App_Start
         {
             kernel.Bind<IStockService>().To<StockManager>().InSingletonScope();
             kernel.Bind<IStockDal>().To<EfStockDal>();
+            kernel.Bind<ISupplierService>().To<SupplierManager>().InSingletonScope();
             kernel.Bind<ISupplierDal>().To<EfSupplierDal>();
             kernel.Bind<DbContext>().To<SupplierDbConnection>();
         }

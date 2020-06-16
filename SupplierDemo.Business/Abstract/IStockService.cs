@@ -1,4 +1,5 @@
-﻿using SupplierDemo.Entites.Entities;
+﻿using SupplierDemo.Entites.ComplexTypes;
+using SupplierDemo.Entites.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace SupplierDemo.Business.Abstract
     {
         List<Stock> GetAll();
         Stock Get(int id);
+
+        List<Stocks> GetStocks();
     }
 }

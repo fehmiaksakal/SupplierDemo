@@ -20,6 +20,12 @@ namespace SupplierDemo.WebUI.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStocks", ReplyAction="http://tempuri.org/IService1/GetStocksResponse")]
         System.Threading.Tasks.Task<SupplierDemo.StockServices.Model.MainVM> GetStocksAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlyStock", ReplyAction="http://tempuri.org/IService1/GetOnlyStockResponse")]
+        System.Collections.Generic.List<SupplierDemo.StockServices.Model.StockVM> GetOnlyStock();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlyStock", ReplyAction="http://tempuri.org/IService1/GetOnlyStockResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SupplierDemo.StockServices.Model.StockVM>> GetOnlyStockAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace SupplierDemo.WebUI.ServiceReference1 {
         
         public System.Threading.Tasks.Task<SupplierDemo.StockServices.Model.MainVM> GetStocksAsync() {
             return base.Channel.GetStocksAsync();
+        }
+        
+        public System.Collections.Generic.List<SupplierDemo.StockServices.Model.StockVM> GetOnlyStock() {
+            return base.Channel.GetOnlyStock();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SupplierDemo.StockServices.Model.StockVM>> GetOnlyStockAsync() {
+            return base.Channel.GetOnlyStockAsync();
         }
     }
 }

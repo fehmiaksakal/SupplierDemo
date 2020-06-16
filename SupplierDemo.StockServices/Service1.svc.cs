@@ -16,48 +16,69 @@ namespace SupplierDemo.StockServices
     public class Service1 : IService1
     {
         private IStockService _stockService;
-        private ISupplierService _supplierService;//, ISupplierService supplierService
+        private ISupplierService _supplierService;
 
-        public Service1(IStockService stockService)
+        public Service1(IStockService stockService, ISupplierService supplierService)
         {
             _stockService = stockService;
-           // _supplierService = supplierService;
+            _supplierService = supplierService;
         }
+
+        public List<StockVM> GetOnlyStock()
+        {
+            List<StockVM> stockvm = new List<StockVM>();
+            var stk = _stockService.GetStocks();
+            foreach (var item in stk)
+            {
+                StockVM stockVM = new StockVM()
+                {
+                    StockId = item.StockId,
+                    ProductId = item.ProductName,
+                    SupplierId = item.SupplierName,
+                    Quatity = item.Quantity,
+                };
+                stockvm.Add(stockVM);
+            }
+            return stockvm;
+        }
+
         public MainVM GetStocks()
         {
-               
-                List<StockVM> stockvm = new List<StockVM>();
-                var stk = _stockService.GetAll();
-                foreach (var item in stk)
+
+            List<StockVM> stockvm = new List<StockVM>();
+            var stk = _stockService.GetStocks();
+            foreach (var item in stk)
+            {
+                StockVM stockVM = new StockVM()
                 {
-                    StockVM stockVM = new StockVM()
-                    {
-                        ProductId = item.ProductId,
-                        Quatity = item.Quatity,
-                        StockId = item.StockId,
-                        SupplierId = item.SupplierId
-                    };
-                    stockvm.Add(stockVM);
-                }
-                //List<SupplierVM> suppliers = new List<SupplierVM>();
-                //var sup = _supplierService.GetAll();
-                //foreach (var item in sup)
-                //{
-                //    SupplierVM supkVM = new SupplierVM()
-                //    {
-                //        SupplierId = item.SupplierId,
-                //        SupplierName = item.Name
-                //    };
-                //    suppliers.Add(supkVM);
-                //}
+                    StockId = item.StockId,
+                    ProductId = item.ProductName,
+                    SupplierId = item.SupplierName,
+                    Quatity = item.Quantity,
+                };
+                stockvm.Add(stockVM);
+            }
+            List<SupplierVM> suppliers = new List<SupplierVM>();
+            var sup = _supplierService.GetAll();
+            foreach (var item in sup)
+            {
+                SupplierVM supkVM = new SupplierVM()
+                {
+                    SupplierId = item.SupplierId,
+                    SupplierName = item.Name
+                };
+                suppliers.Add(supkVM);
+            }
 
             MainVM mainVM = new MainVM()
             {
                 Stock = stockvm,
-               // Supp = suppliers
+                Supp = suppliers
             };
 
             return mainVM;
         }
+
+
     }
 }

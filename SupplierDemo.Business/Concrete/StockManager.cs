@@ -1,5 +1,6 @@
 ﻿using SupplierDemo.Business.Abstract;
 using SupplierDemo.DataAccess.Abstract;
+using SupplierDemo.Entites.ComplexTypes;
 using SupplierDemo.Entites.Entities;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace SupplierDemo.Business.Concrete
         public List<Stock> GetAll()
         {
             return _stockDal.GetList();
+        }
+
+        public List<Stocks> GetStocks()
+        {
+            return _stockDal.GetStocks();
         }
     }
 }

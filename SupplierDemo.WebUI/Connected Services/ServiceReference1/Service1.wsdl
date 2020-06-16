@@ -13,16 +13,35 @@
   <wsdl:message name="IService1_GetStocks_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStocksResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetOnlyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlyStock" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOnlyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlyStockResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetStocks">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetStocks" message="tns:IService1_GetStocks_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetStocksResponse" message="tns:IService1_GetStocks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOnlyStock" message="tns:IService1_GetOnlyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOnlyStockResponse" message="tns:IService1_GetOnlyStock_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WcfEndPoint" type="tns:IService1">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetStocks">
       <soap:operation soapAction="http://tempuri.org/IService1/GetStocks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlyStock">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOnlyStock" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

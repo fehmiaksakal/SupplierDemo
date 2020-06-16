@@ -15,10 +15,10 @@
   <xs:element name="ArrayOfStockVM" nillable="true" type="tns:ArrayOfStockVM" />
   <xs:complexType name="StockVM">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Quatity" type="xs:int" />
       <xs:element minOccurs="0" name="StockId" type="xs:int" />
-      <xs:element minOccurs="0" name="SupplierId" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplierId" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StockVM" nillable="true" type="tns:StockVM" />
