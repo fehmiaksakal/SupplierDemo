@@ -13,39 +13,45 @@ namespace SupplierDemo.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+
 
         public ActionResult Index()
         {
-
-            var resp = service.GetStocks();
-            HomePageVM homePageVM = new HomePageVM()
+            using (ServiceReference1.Service1Client service = new ServiceReference1.Service1Client())
             {
-                stocks = resp.Stock,
-                suppliers = resp.Supp
-            };
+                var resp = service.GetStocks();
+                HomePageVM homePageVM = new HomePageVM()
+                {
+                    stocks = resp.Stock,
+                    suppliers = resp.Supp
+                };
+                return View(homePageVM);
+            }
 
-            return View(homePageVM);
+
         }
         [HttpPost]
         public List<StockVM> GetCurStock(string supId)
         {
 
-            List<StockVM> resp = service.GetOnlyStock();
-            XmlSerializer ser = new XmlSerializer(typeof(StockVM));
-            string curName = supId + " " + DateTime.Now.ToString().Replace(".","-").Replace(":", ";");
-            string savePath = Server.MapPath(@"/XMLBackUP/" + curName + ".xml");
-            var xmlSavePath = new XElement("Stocks",
-                    from st in resp
-                    select new XElement(
-                            "Stock",
-                                new XElement("StockId", st.StockId),
-                                new XElement("SupplierName", st.SupplierId),
-                                new XElement("ProductName", st.ProductId),
-                                new XElement("Quantity", st.Quatity)
-                        ));
-            xmlSavePath.Save(savePath);
-            return resp;
+            using (ServiceReference1.Service1Client service = new ServiceReference1.Service1Client())
+            {
+                List<StockVM> resp = service.GetOnlyStock();
+                XmlSerializer ser = new XmlSerializer(typeof(StockVM));
+                string curName = supId + " " + DateTime.Now.ToString().Replace(".", "-").Replace(":", ";");
+                string savePath = Server.MapPath(@"/XMLBackUP/" + curName + ".xml");
+                var xmlSavePath = new XElement("Stocks",
+                        from st in resp
+                        select new XElement(
+                                "Stock",
+                                    new XElement("StockId", st.StockId),
+                                    new XElement("SupplierName", st.SupplierId),
+                                    new XElement("ProductName", st.ProductId),
+                                    new XElement("Quantity", st.Quatity)
+                            ));
+                xmlSavePath.Save(savePath);
+                return resp;
+            }
         }
     }
 }
