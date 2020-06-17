@@ -8,6 +8,7 @@ using SupplierDemo.Entites.Entities;
 using SupplierDemo.StockServices.Model;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace SupplierDemo.WebUI.Controllers
 {
@@ -27,13 +28,10 @@ namespace SupplierDemo.WebUI.Controllers
                 };
                 return View(homePageVM);
             }
-
-
         }
         [HttpPost]
-        public List<StockVM> GetCurStock(string supId)
+        public string GetCurStock(string supId)
         {
-
             using (ServiceReference1.Service1Client service = new ServiceReference1.Service1Client())
             {
                 List<StockVM> resp = service.GetOnlyStock();
@@ -50,7 +48,7 @@ namespace SupplierDemo.WebUI.Controllers
                                     new XElement("Quantity", st.Quatity)
                             ));
                 xmlSavePath.Save(savePath);
-                return resp;
+                return JsonConvert.SerializeObject(resp.OrderBy(x=>x.Quatity));
             }
         }
     }

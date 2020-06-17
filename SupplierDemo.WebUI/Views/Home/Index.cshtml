@@ -40,7 +40,7 @@
                     <th>Quantity</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="ProductTable">
                 @foreach (var stock in Model.stocks)
                 {
                     <tr>
@@ -62,8 +62,15 @@
                 url: '/Home/GetCurStock',
                 type: 'POST',
                 data: { supId: supId },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
+                    debugger
+                    var obj = JSON.parse(data);
+                    $('#ProductTable').empty();
+
+                    $.each(obj, function (key, val) {
+                        $('#ProductTable').append('<tr><td>' + val.ProductId + '</td><td>' + val.SupplierId + '</td><td>' + val.Quatity + '</td></tr>')
+                    });
+                    console.log(obj);
                 },
                 error: function (data) {
                     console.log(data);
