@@ -14,5 +14,6 @@ namespace SupplierDemo.Business.Abstract
         Stock Get(int id);
 
         List<Stocks> GetStocks();
+        List<Stocks> Update(int stockId, int quantity);
     }
 }

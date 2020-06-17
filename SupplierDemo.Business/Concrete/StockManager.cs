@@ -33,5 +33,10 @@ namespace SupplierDemo.Business.Concrete
         {
             return _stockDal.GetStocks();
         }
+
+        public List<Stocks> Update(int stockId, int quantity)
+        {
+            return _stockDal.Update(stockId, quantity);
+        }
     }
 }

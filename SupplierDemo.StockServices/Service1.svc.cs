@@ -79,6 +79,22 @@ namespace SupplierDemo.StockServices
             return mainVM;
         }
 
-
+        public List<StockVM> UpdateStock(int stockId, int quantity)
+        {
+            List<StockVM> stockvm = new List<StockVM>();
+            var stk = _stockService.Update(stockId, quantity);
+            foreach (var item in stk)
+            {
+                StockVM stockVM = new StockVM()
+                {
+                    StockId = item.StockId,
+                    ProductId = item.ProductName,
+                    SupplierId = item.SupplierName,
+                    Quatity = item.Quantity,
+                };
+                stockvm.Add(stockVM);
+            }
+            return stockvm;
+        }
     }
 }

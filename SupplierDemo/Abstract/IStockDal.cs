@@ -11,5 +11,6 @@ namespace SupplierDemo.DataAccess.Abstract
     public interface IStockDal : IEntityRepository<Stock>
     {
         List<Stocks> GetStocks();
+        List<Stocks> Update(int stockId, int quantity);
     }
 }

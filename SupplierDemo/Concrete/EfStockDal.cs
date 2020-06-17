@@ -4,6 +4,7 @@ using SupplierDemo.Entites.ComplexTypes;
 using SupplierDemo.Entites.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,22 @@ namespace SupplierDemo.DataAccess.Concrete
                                  Quantity = st.Quatity
                              };
                 return result.ToList();
+            }
+        }
+
+        public List<Stocks> Update(int stockId, int quantity)
+        {
+            using (var context = new SupplierDbConnection())
+            {
+                var result = (from st in context.Stock
+                              where st.StockId == stockId
+                              select st).FirstOrDefault();
+                result.Quatity = quantity;
+
+                context.Entry(result).State = EntityState.Modified;
+                context.SaveChanges();
+
+                return GetStocks();
             }
         }
     }

@@ -4,7 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" style="padding:10">
+<div class="jumbotron" style="padding:10px">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4">
             <h3>Tedarikçiler</h3>
@@ -38,6 +38,7 @@
                     <th>Product Name</th>
                     <th>Supplier Name</th>
                     <th>Quantity</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="ProductTable">
@@ -47,6 +48,7 @@
                         <td>@stock.ProductId</td>
                         <td>@stock.SupplierId</td>
                         <td>@stock.Quatity</td>
+                        <td></td>
                     </tr>
                 }
             </tbody>
@@ -56,7 +58,64 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        $('#getStock').click(function () {
+        function SadeceRakam(e, allowedchars) {
+            var key = e.charCode == undefined ? e.keyCode : e.charCode;
+            if ((/^[0-9]+$/.test(String.fromCharCode(key))) || key == 0 || isPassKey(key, allowedchars)) { return true; }
+            else { return false; }
+        };
+        function isPassKey(key, allowedchars) {
+            if (allowedchars != null) {
+                for (var i = 0; i < allowedchars.length; i++) {
+                    if (allowedchars[i] == String.fromCharCode(key))
+                        return true;
+                }
+            }
+            return false;
+        };
+        function updateStock(stokcId) {
+            debugger
+            console.log(stokcId);
+            var supId = $('#SupMenu').val();
+            var newStock = parseInt(stokcId.parentElement.children[0].value);
+            var stockId = stokcId.parentElement.children[0].dataset.stokcid;
+            if (newStock < 0 || newStock == 0 || $.trim(newStock) == "" || isNaN(newStock)) {
+                swal("Dikkat Geçerli Veri Girin!");
+            }
+            else {
+                $.ajax({
+                    url: '/Home/UpdateStock',
+                    type: 'Post',
+                    data: {
+                        newStock: newStock,
+                        stockId: stockId,
+                        supId: supId
+                    },
+                    success: function (data) {
+                        debugger
+                        var obj = JSON.parse(data);
+                        $('#ProductTable').empty();
+                        var i = 0;
+                        $.each(obj, function (key, val) {
+                            var control = false;
+                            if (supId == val.SupplierId) {
+                                control = true;
+                            }
+                            $('#ProductTable').append('<tr><td>' + val.ProductId + '</td> <td>' + val.SupplierId + '</td> <td>' + val.Quatity + '</td> <td>' + (control ? '<input type="text" style="float:left" data-stokcId="' + val.StockId + '" placeholder ="Yeni Stok"autocomplete="off" required onblur="SadeceRakam(event,false)" onkeypress="return SadeceRakam(event);"><button class="btn btn-success btn-sm" onclick="updateStock(this)">Güncelle</button>' : "")
+                                + '</td> </tr> ');
+                            i++;
+                        });
+                        swal("Stok Güncellendi!");
+
+                        console.log(obj);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                });
+            }
+        };
+
+        function getStockFunc() {
             var supId = $('#SupMenu').val();
             $.ajax({
                 url: '/Home/GetCurStock',
@@ -66,16 +125,31 @@
                     debugger
                     var obj = JSON.parse(data);
                     $('#ProductTable').empty();
-
+                    var i = 0;
                     $.each(obj, function (key, val) {
-                        $('#ProductTable').append('<tr><td>' + val.ProductId + '</td><td>' + val.SupplierId + '</td><td>' + val.Quatity + '</td></tr>')
+                        var control = false;
+                        if (supId == val.SupplierId) {
+                            control = true;
+                        }
+                        $('#ProductTable').append('<tr><td>' + val.ProductId + '</td> <td>' + val.SupplierId + '</td> <td>' + val.Quatity + '</td> <td>' + (control ? '<input type="text" style="float:left" data-stokcId="' + val.StockId + '" placeholder ="Yeni Stok"autocomplete="off" required onblur="SadeceRakam(event,false)" onkeypress="return SadeceRakam(event);"><button class="btn btn-success btn-sm" onclick="updateStock(this)">Güncelle</button>' : "")
+                            + '</td> </tr> ');
+                        i++;
                     });
+                    swal(i.toString() + " Adet Ürün Listelendi. ");
+
                     console.log(obj);
                 },
                 error: function (data) {
                     console.log(data);
                 },
             })
+        }
+        $(document).ready(function () {
+
+            $('#getStock').click(function () {
+                getStockFunc();
+            });
+
         });
     </script>
 

@@ -21,8 +21,11 @@ namespace SupplierDemo.StockServices
         [OperationContract]
         List<StockVM> GetOnlyStock();
 
+        [OperationContract]
+        List<StockVM> UpdateStock(int stockId, int quantity);
 
-         
+
+
         // TODO: Add your service operations here
     }
 

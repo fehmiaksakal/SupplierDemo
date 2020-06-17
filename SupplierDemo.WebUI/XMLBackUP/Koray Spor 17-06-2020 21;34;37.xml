@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Stocks>
+  <Stock>
+    <StockId>1</StockId>
+    <SupplierName>Koray Spor</SupplierName>
+    <ProductName>Spor Ayakkabı</ProductName>
+    <Quantity>10</Quantity>
+  </Stock>
+  <Stock>
+    <StockId>2</StockId>
+    <SupplierName>Kardeşler Ayakkabı</SupplierName>
+    <ProductName>Spor Ayakkabı</ProductName>
+    <Quantity>4</Quantity>
+  </Stock>
+  <Stock>
+    <StockId>3</StockId>
+    <SupplierName>Koray Spor</SupplierName>
+    <ProductName>Bot</ProductName>
+    <Quantity>6</Quantity>
+  </Stock>
+  <Stock>
+    <StockId>4</StockId>
+    <SupplierName>Kardeşler Ayakkabı</SupplierName>
+    <ProductName>Bot</ProductName>
+    <Quantity>19</Quantity>
+  </Stock>
+</Stocks>
