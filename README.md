@@ -31,3 +31,16 @@
 
 ![service uninstall](wsuninstal.JPG)
 
+### Updated Stock 
+
+* Suppliers updated avaible onyly own stocks.
+
+![update one ](update1.JPG)
+
+* Datas are stored according to stock quantity.
+
+![service start](update2.JPG)
+
+
+![service sol](update3.JPG)
+
